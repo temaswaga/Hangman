@@ -20,6 +20,7 @@ public class Hangman {
                 System.out.println("\nWell, lets start!");
                 int numberOfMistakes = 0;
                 HashSet<Character> letters = new HashSet<>();
+
                 for (int j = 0; j < 1000; j++) {
                     game.questionPrinter(i, words); // печатаю вопрос
                     game.hangmanPrinter(numberOfMistakes); // печатаю виселицу
@@ -36,18 +37,15 @@ public class Hangman {
                     };
                 }
             }
-
             else if (answerYesOrNo.equalsIgnoreCase("no")) {
                 System.out.println("Bye bye!");
                 break;
             }
-
             else {
                 System.out.println("Please answer yes or no");
                 i = -1;
             }
         }
-
     }
 
     public String gameStarter() {
