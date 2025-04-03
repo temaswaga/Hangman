@@ -15,7 +15,6 @@ public class HangmanGame extends HangmanUI {
                 int numberOfCorrectLetters = 0;
                 char[] alphabet = alphabetCreater();
                 HashSet<Character> letters = new HashSet<>();
-                HashSet<Character> notCorrectLetters = new HashSet<>();
 
                 do {
                     questionPrinter(i, getQuestions());     // печатаю вопрос
