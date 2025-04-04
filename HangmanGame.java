@@ -1,10 +1,10 @@
-import java.io.FileNotFoundException;
 import java.util.HashSet;
 
 public class HangmanGame extends HangmanUI {
 
-    public static void gamePlay() throws FileNotFoundException {
-        for (int i = 0; i < getQuestions().length; i++) {
+
+    public static void gamePlay() {
+        for (int i = 0; i < Question.getQuestions().length; i++) {
             boolean answerToPlay = askToPlay(i);
             if (!answerToPlay) {
                 break;
@@ -17,26 +17,26 @@ public class HangmanGame extends HangmanUI {
                 HashSet<Character> letters = new HashSet<>();
 
                 do {
-                    questionPrinter(i, getQuestions());     // печатаю вопрос
-                    hangmanPrinter(numberOfMistakes);       // печатаю виселицу
-                    wordPrinter(i, getAnswers(), letters);  // печатаю слово
-                    alphabetPrinter(alphabet);              // печатаю алфавит
+                    questionPrinter(i, Question.getQuestions());
+                    hangmanPrinter(numberOfMistakes);
+                    wordPrinter(i, Question.getAnswers(), letters);
+                    alphabetPrinter(alphabet);
 
-                    char lastInsertedLetter = letterInserter();     // Прошу ввести букву
+                    char lastInsertedLetter = letterInserter();
                     
-                    int countOfParticularLetter = frequencyOfTheLetterInWordFinder(i, getAnswers(), lastInsertedLetter);     // Определяю ошибку или же правильную букву (а точнее её кол-во в слове)
+                    int countOfParticularLetter = frequencyOfTheLetterInWordFinder(i, Question.getAnswers(), lastInsertedLetter);
 
-                    if(countOfParticularLetter == 0 && !letters.contains(lastInsertedLetter)) {             // считаю кол-во ошибок
+                    if(countOfParticularLetter == 0 && !letters.contains(lastInsertedLetter)) {
                         numberOfMistakes++;
                         insertXInsteadOfLetter(alphabet, lastInsertedLetter);
-                    } else if (countOfParticularLetter > 0 && !letters.contains(lastInsertedLetter)) {      // считаю кол-во угадов
-                        numberOfCorrectLetters += countOfParticularLetter;          // += а не ++ потому-что есть слова с несколькими одинаковыми буквами, например Moscow (две о)
+                    } else if (countOfParticularLetter > 0 && !letters.contains(lastInsertedLetter)) {
+                        numberOfCorrectLetters += countOfParticularLetter;
                         insertVInsteadOfLetter(alphabet, lastInsertedLetter);
                     }
 
-                    letterToHashSetAdder(letters, lastInsertedLetter);     // добавляю введенную букву в HashSet
+                    letterToHashSetAdder(letters, lastInsertedLetter);
 
-                    String winOrLose = winOrLoseDefiner(i, getAnswers(), numberOfMistakes, numberOfCorrectLetters); // определяю победу или проигрыш, если все буквы отгаданы или 6 ошибок соответственно
+                    String winOrLose = winOrLoseDefiner(i, Question.getAnswers(), numberOfMistakes, numberOfCorrectLetters);
                     if (winOrLose.equalsIgnoreCase("won") || winOrLose.equalsIgnoreCase("lost")) {
                         break;
                     }

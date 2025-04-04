@@ -1,7 +1,7 @@
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class HangmanUI extends Question{
+public class HangmanUI {
     final static int MAX_COUNT_OF_MISTAKES = 6;
     static Scanner scanner = new Scanner(System.in);
 
@@ -16,7 +16,7 @@ public class HangmanUI extends Question{
 
     public static boolean askToPlay(int numberOfIteration) {
         do {
-            String answerYesOrNo = HangmanUI.gameStarter(numberOfIteration);
+            String answerYesOrNo = gameStarter(numberOfIteration);
             if (answerYesOrNo.equalsIgnoreCase("yes")) {
                 return true;
             } else if (answerYesOrNo.equalsIgnoreCase("no")) {
@@ -32,7 +32,7 @@ public class HangmanUI extends Question{
         System.out.println("Yours question is: " + questions[numberOfQuestion]);
     }
 
-    public static void wordPrinter(int numberOfQuestion, String[] answers, HashSet<Character> letters) {   // перебираю буквы секретного слова и если мой HashSet contains эту букву - вывожу её вместо "_ "
+    public static void wordPrinter(int numberOfQuestion, String[] answers, HashSet<Character> letters) {
         System.out.print("      ");
         for (int i = 0; i < answers[numberOfQuestion].length(); i++) {
             if (letters.contains(answers[numberOfQuestion].charAt(i))) {
@@ -50,21 +50,21 @@ public class HangmanUI extends Question{
     }
 
     public static void letterToHashSetAdder(HashSet<Character> letters, char letter) {
-        letters.add(Character.toLowerCase(letter));      // Добавляю в хэшсет как нижний так и верхний регистры введенной буквы для того чтобы он был не важен
+        letters.add(Character.toLowerCase(letter));
         letters.add(Character.toUpperCase(letter));
     }
 
-    public static int frequencyOfTheLetterInWordFinder(int indexOfQuestion, String[] answers, Character letter) { // во
+    public static int frequencyOfTheLetterInWordFinder(int indexOfQuestion, String[] answers, Character letter) {
         int countOfLettersInWord = 0;
         for (int i = 0; i < answers[indexOfQuestion].length(); i++) {
-            if (Character.toLowerCase(letter) == Character.toLowerCase(answers[indexOfQuestion].charAt(i))) {  // При вводе обе переменные к нижнему регистру, чтобы избежать ошибок при сравнении
+            if (Character.toLowerCase(letter) == Character.toLowerCase(answers[indexOfQuestion].charAt(i))) {
                 countOfLettersInWord++;
             }
         }
         return countOfLettersInWord;
     }
 
-    public static void hangmanPrinter(int numberOfMistakes) throws IllegalArgumentException { // Обрабатываю случай если numberOfMistakes окажется не принадлежащим [0,5]
+    public static void hangmanPrinter(int numberOfMistakes) throws IllegalArgumentException {
         if (numberOfMistakes < 0 || numberOfMistakes >= HANGMAN_STATES.length) {
             throw new IllegalArgumentException(
                     "Invalid number of mistakes: " + numberOfMistakes +
