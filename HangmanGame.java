@@ -24,10 +24,11 @@ public class HangmanGame {
                     char lastInsertedLetter = HangmanUI.letterInserter();
                     int countOfParticularLetter = HangmanUI.frequencyOfTheLetterInWordFinder(i, Question.getAnswers(), lastInsertedLetter);
 
-                    if(countOfParticularLetter == 0 && !letters.contains(lastInsertedLetter)) {
+                    if (countOfParticularLetter == 0 && !letters.contains(lastInsertedLetter)) {
                         numberOfMistakes++;
                         HangmanUI.insertXInsteadOfLetter(alphabet, lastInsertedLetter);
-                    } else if (countOfParticularLetter > 0 && !letters.contains(lastInsertedLetter)) {
+                    }
+                    else if (countOfParticularLetter > 0 && !letters.contains(lastInsertedLetter)) {
                         numberOfCorrectLetters += countOfParticularLetter;
                         HangmanUI.insertVInsteadOfLetter(alphabet, lastInsertedLetter);
                     }
