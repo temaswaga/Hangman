@@ -2,7 +2,6 @@ import java.util.HashSet;
 
 public class HangmanGame {
 
-
     public static void gamePlay() {
         for (int i = 0; i < Question.getQuestions().length; i++) {
             boolean answerToPlay = HangmanUI.askToPlay(i);
@@ -23,7 +22,6 @@ public class HangmanGame {
                     HangmanUI.alphabetPrinter(alphabet);
 
                     char lastInsertedLetter = HangmanUI.letterInserter();
-                    
                     int countOfParticularLetter = HangmanUI.frequencyOfTheLetterInWordFinder(i, Question.getAnswers(), lastInsertedLetter);
 
                     if(countOfParticularLetter == 0 && !letters.contains(lastInsertedLetter)) {
@@ -40,7 +38,6 @@ public class HangmanGame {
                     if (winOrLose.equalsIgnoreCase("won") || winOrLose.equalsIgnoreCase("lost")) {
                         break;
                     }
-
                 } while (numberOfMistakes < HangmanUI.MAX_COUNT_OF_MISTAKES);
             }
         }

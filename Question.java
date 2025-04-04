@@ -9,7 +9,4 @@ public class Question {
     public static String[] getQuestions() {
         return questions;
     }
-
-
-
 }
