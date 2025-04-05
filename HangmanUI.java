@@ -28,15 +28,15 @@ public class HangmanUI {
         } while (true);
     }
 
-    public static void questionPrinter(int numberOfQuestion, String[] questions) {
-        System.out.println("Yours question is: " + questions[numberOfQuestion]);
+    public static void questionPrinter(int numberOfQuestion) {
+        System.out.println("Yours question is: " + Question.getQuestions(numberOfQuestion));
     }
 
-    public static void wordPrinter(int numberOfQuestion, String[] answers, HashSet<Character> letters) {
+    public static void wordPrinter(int numberOfQuestion, HashSet<Character> letters) {
         System.out.print("      ");
-        for (int i = 0; i < answers[numberOfQuestion].length(); i++) {
-            if (letters.contains(answers[numberOfQuestion].charAt(i))) {
-                System.out.print(answers[numberOfQuestion].charAt(i) + " ");
+        for (int i = 0; i < Question.getAnswers(numberOfQuestion).length(); i++) {
+            if (letters.contains(Question.getAnswers(numberOfQuestion).charAt(i))) {
+                System.out.print(Question.getAnswers(numberOfQuestion).charAt(i) + " ");
             }
             else {
                 System.out.print("_ ");
@@ -54,10 +54,10 @@ public class HangmanUI {
         letters.add(Character.toUpperCase(letter));
     }
 
-    public static int frequencyOfTheLetterInWordFinder(int indexOfQuestion, String[] answers, Character letter) {
+    public static int frequencyOfTheLetterInWordFinder(int indexOfQuestion, Character letter) {
         int countOfLettersInWord = 0;
-        for (int i = 0; i < answers[indexOfQuestion].length(); i++) {
-            if (Character.toLowerCase(letter) == Character.toLowerCase(answers[indexOfQuestion].charAt(i))) {
+        for (int i = 0; i < Question.getAnswers(indexOfQuestion).length(); i++) {
+            if (Character.toLowerCase(letter) == Character.toLowerCase(Question.getAnswers(indexOfQuestion).charAt(i))) {
                 countOfLettersInWord++;
             }
         }
@@ -74,15 +74,15 @@ public class HangmanUI {
         System.out.print(HANGMAN_STATES[numberOfMistakes]);
     }
 
-    public static String winOrLoseDefiner(int numberOfQuestion, String[] answers, int numberOfMistakes, int numberOfCorrectLetters) {
+    public static String winOrLoseDefiner(int numberOfQuestion, int numberOfMistakes, int numberOfCorrectLetters) {
         if (numberOfMistakes >= MAX_COUNT_OF_MISTAKES) {
             System.out.println(HANGMAN_STATES[numberOfMistakes]);
             System.out.println("\n   You're loooooooser \uD83E\uDD2A \n");
             return "lost";
         }
-        if (numberOfCorrectLetters == answers[numberOfQuestion].length()) {
+        if (numberOfCorrectLetters == Question.getAnswers(numberOfQuestion).length()) {
             System.out.println("\n  You've won the game! \uD83E\uDD70 ");
-            System.out.println("  The word was " + answers[numberOfQuestion] + "\n");
+            System.out.println("  The word was " + Question.getAnswers(numberOfQuestion) + "\n");
             return "won";
         }
         return "";

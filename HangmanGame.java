@@ -3,7 +3,7 @@ import java.util.HashSet;
 public class HangmanGame {
 
     public static void gamePlay() {
-        for (int i = 0; i < Question.getQuestions().length; i++) {
+        for (int i = 0; i < Question.getQuestions(i).length(); i++) {
             boolean answerToPlay = HangmanUI.askToPlay(i);
             if (!answerToPlay) {
                 break;
@@ -16,13 +16,13 @@ public class HangmanGame {
                 HashSet<Character> letters = new HashSet<>();
 
                 do {
-                    HangmanUI.questionPrinter(i, Question.getQuestions());
+                    HangmanUI.questionPrinter(i);
                     HangmanUI.hangmanPrinter(numberOfMistakes);
-                    HangmanUI.wordPrinter(i, Question.getAnswers(), letters);
+                    HangmanUI.wordPrinter(i, letters);
                     HangmanUI.alphabetPrinter(alphabet);
 
                     char lastInsertedLetter = HangmanUI.letterInserter();
-                    int countOfParticularLetter = HangmanUI.frequencyOfTheLetterInWordFinder(i, Question.getAnswers(), lastInsertedLetter);
+                    int countOfParticularLetter = HangmanUI.frequencyOfTheLetterInWordFinder(i, lastInsertedLetter);
 
                     if (countOfParticularLetter == 0 && !letters.contains(lastInsertedLetter)) {
                         numberOfMistakes++;
@@ -35,7 +35,7 @@ public class HangmanGame {
 
                     HangmanUI.letterToHashSetAdder(letters, lastInsertedLetter);
 
-                    String winOrLose = HangmanUI.winOrLoseDefiner(i, Question.getAnswers(), numberOfMistakes, numberOfCorrectLetters);
+                    String winOrLose = HangmanUI.winOrLoseDefiner(i, numberOfMistakes, numberOfCorrectLetters);
                     if (winOrLose.equalsIgnoreCase("won") || winOrLose.equalsIgnoreCase("lost")) {
                         break;
                     }
