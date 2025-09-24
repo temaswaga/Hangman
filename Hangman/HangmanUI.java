@@ -1,3 +1,5 @@
+package Hangman;
+
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -29,14 +31,14 @@ public class HangmanUI {
     }
 
     public static void questionPrinter(int numberOfQuestion) {
-        System.out.println("Yours question is: " + Question.getQuestions(numberOfQuestion));
+        System.out.println("Yours question is: " + Questions.getQuestions(numberOfQuestion));
     }
 
     public static void wordPrinter(int numberOfQuestion, HashSet<Character> letters) {
         System.out.print("      ");
-        for (int i = 0; i < Question.getAnswers(numberOfQuestion).length(); i++) {
-            if (letters.contains(Question.getAnswers(numberOfQuestion).charAt(i))) {
-                System.out.print(Question.getAnswers(numberOfQuestion).charAt(i) + " ");
+        for (int i = 0; i < Questions.getAnswers(numberOfQuestion).length(); i++) {
+            if (letters.contains(Questions.getAnswers(numberOfQuestion).charAt(i))) {
+                System.out.print(Questions.getAnswers(numberOfQuestion).charAt(i) + " ");
             }
             else {
                 System.out.print("_ ");
@@ -46,7 +48,7 @@ public class HangmanUI {
 
     public static char letterInserter() {
         System.out.print("\n\n   Enter a letter: ");
-        return scanner.nextLine().charAt(0);
+        return scanner.nextLine().toLowerCase().charAt(0);
     }
 
     public static void letterToHashSetAdder(HashSet<Character> letters, char letter) {
@@ -56,8 +58,8 @@ public class HangmanUI {
 
     public static int frequencyOfTheLetterInWordFinder(int indexOfQuestion, Character letter) {
         int countOfLettersInWord = 0;
-        for (int i = 0; i < Question.getAnswers(indexOfQuestion).length(); i++) {
-            if (Character.toLowerCase(letter) == Character.toLowerCase(Question.getAnswers(indexOfQuestion).charAt(i))) {
+        for (int i = 0; i < Questions.getAnswers(indexOfQuestion).length(); i++) {
+            if (Character.toLowerCase(letter) == Character.toLowerCase(Questions.getAnswers(indexOfQuestion).charAt(i))) {
                 countOfLettersInWord++;
             }
         }
@@ -80,9 +82,9 @@ public class HangmanUI {
             System.out.println("\n   You're loooooooser \uD83E\uDD2A \n");
             return "lost";
         }
-        if (numberOfCorrectLetters == Question.getAnswers(numberOfQuestion).length()) {
+        if (numberOfCorrectLetters == Questions.getAnswers(numberOfQuestion).length()) {
             System.out.println("\n  You've won the game! \uD83E\uDD70 ");
-            System.out.println("  The word was " + Question.getAnswers(numberOfQuestion) + "\n");
+            System.out.println("  The word was " + Questions.getAnswers(numberOfQuestion) + "\n");
             return "won";
         }
         return "";

@@ -1,9 +1,11 @@
+package Hangman;
+
 import java.util.HashSet;
 
 public class HangmanGame {
 
     public static void gamePlay() {
-        for (int i = 0; i < Question.getQuestions(i).length(); i++) {
+        for (int i = 0; i < Questions.getQuestions(i).length(); i++) {
             boolean answerToPlay = HangmanUI.askToPlay(i);
             if (!answerToPlay) {
                 break;
